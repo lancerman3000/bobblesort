@@ -1,37 +1,41 @@
-let arr1 = [];
-randomArray(arr1);
-console.log(`unsorted random array`);
-console.log(arr1);
-console.log(`same but sorted with 'for' array`);
-bobbleSortFor(arr1);
-console.log(arr1);
+console.clear();
 
-let arr2 = [];
-randomArray(arr2, 100)
-console.log(`unsorted random array`);
-console.log(arr2);
-bobbleSortWhile(arr2)
-console.log(`same but sorted with 'while' array`);
-console.log(arr1);
+let array0 = [];
+let compearArray = [];
+let compearArray1 = [];
 
+randomArray(array0);
+compearArray = compearArray1 = array0;
+console.log('begin');
+console.log(array0);
+bobbleSortFor(array0);
+console.log('sorted by FOR');
+console.log(array0);
+bobbleSortWhile(compearArray, 0, 0);
+console.log('sorted by WHILE');
 
-
-
-
-
-
-
-
-
+console.log(compearArray);
+array0 === compearArray ? console.log('compairsom passed') : console.log('U loose');
+console.log();
+bobbleSortDoWhile(compearArray1);
+console.log('sorted by DO WHILE');
+console.log(compearArray1);
+array0 === compearArray1 ? console.log('compairsom passed') : console.log('U loose');
 
 
 
-function randomArray(array, length = 10) {
+function randomArray(array, length = 11) {
     for (i = 0; i < length; i++) {
-        array.push(Math.round(Math.random() * 200) - 100)
+        array.push(Math.round(Math.random() * 2000) - 1000)
     }
 }
 
+function bob(array) {
+    array.sort(function(a, b) {
+        return a - b;
+    })
+    return array
+}
 
 function bobbleSortFor(array) {
     for (let n = 0; n < array.length; n++) {
@@ -45,18 +49,30 @@ function bobbleSortFor(array) {
     }
 }
 
-function bobbleSortWhile(array) {
-    let n = 0;
-    let i = 0;
+function bobbleSortWhile(array, n = 0, i = 0) {
     while (n < array.length) {
-        while (i < array.length - 1 - n) {
+        while (i < array.length - n) {
             if (array[i] > array[i + 1]) {
                 const buff = array[i]
                 array[i] = array[i + 1]
                 array[i + 1] = buff
             }
-            i++;
+            ++i;
         }
-        n++;
+        ++n;
     }
+}
+
+function bobbleSortDoWhile(array, i = 0, n = 0) {
+    do {
+        do {
+            if (array[i] > array[i + 1]) {
+                const buff = array[i]
+                array[i] = array[i + 1]
+                array[i + 1] = buff
+            }
+            i++
+        } while (i < array.length - 1 - n)
+        n++;
+    } while (n < array.length - 1)
 }
